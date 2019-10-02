@@ -16,6 +16,8 @@ app.get('/', (req, res) => {
   res.send('hello world')
 })
 
+app.use('/users', require('./routes/users'))
+
 //express port
 app.listen(3000, () => {
   console.log(`App is running on port 3000`)
