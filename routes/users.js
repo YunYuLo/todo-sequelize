@@ -3,6 +3,9 @@ const router = express.Router()
 const passport = require('passport')
 const bcrypt = require('bcryptjs')
 
+const db = require('../models')
+const User = db.User
+
 router.get('/login', (req, res) => {
   res.render('login')
 })
@@ -16,7 +19,11 @@ router.get('/register', (req, res) => {
 })
 
 router.post('/register', (req, res) => {
-  res.send('register')
+  User.create({
+    name: req.body.name,
+    email: req.body.email,
+    password: req.body.password
+  }).then(user => res.redirect('/'))
 })
 
 router.get('/logout', (req, res) => {
