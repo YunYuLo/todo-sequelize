@@ -85,7 +85,7 @@ router.delete('/:id/delete', authenticated, (req, res) => {
       })
     })
     .then((todo) => { return res.redirect('/') })
-    .catch((error) => { return res.status(422).json(erro) })
+    .catch((error) => { return res.status(422).json(error) })
 })
 
 module.exports = router
