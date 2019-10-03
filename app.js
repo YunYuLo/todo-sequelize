@@ -32,11 +32,9 @@ app.use((req, res, next) => {
 })
 
 //router
-app.get('/', (req, res) => {
-  res.send('hello world')
-})
-
+app.use('/', require('./routes/home'))
 app.use('/users', require('./routes/users'))
+app.use('/todos', require('./routes/todo'))
 
 //express port
 app.listen(3000, () => {
