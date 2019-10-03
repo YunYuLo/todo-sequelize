@@ -1,0 +1,17 @@
+<a href="/todos/new" class="btn btn-outline-light">Create</a>
+
+
+<ul class="plates">
+  {{#each todos}}
+  <li>
+    <input type="checkbox" name="done" id="{{{this.id}}}" {{#if this.done}}checked{{/if}} disabled>
+    <label for="{{{this.id}}}">{{{this.name}}}</label>
+
+    <a href="/todos/{{{this.id}}}">detail</a>
+    <a href="/todos/{{{this.id}}}/edit">edit</a>
+    <form class="add-items" action="/todos/{{{this.id}}}/delete?_method=DELETE" method="POST" style="display: inline;">
+      <button type="submit">delete</button>
+    </form>
+  </li>
+  {{/each}}
+</ul>

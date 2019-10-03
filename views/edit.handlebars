@@ -1,0 +1,7 @@
+<div class="add-items">
+  <form action="/todos/{{{todo.id}}}?_method=PUT" method="POST">
+    <input type="checkbox" name="done" {{#if todo.done}}checked{{/if}}>
+    <input type="text" name="name" value="{{{todo.name}}}" placeholder="name">
+    <button type="submit">Edit</button>
+  </form>
+</div>
