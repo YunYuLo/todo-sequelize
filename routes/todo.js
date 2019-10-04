@@ -12,8 +12,10 @@ router.get('/new', authenticated, (req, res) => {
 
 // 新增一筆  Todo
 router.post('/', authenticated, (req, res) => {
+  console.log(req.body.note)
   Todo.create({
     name: req.body.name,
+    note: req.body.note,
     done: false,
     UserId: req.user.id
   })
@@ -63,6 +65,7 @@ router.put('/:id', authenticated, (req, res) => {
   })
     .then((todo) => {
       todo.name = req.body.name
+      todo.note = req.body.note
       todo.done = req.body.done === "on"
 
       return todo.save()
