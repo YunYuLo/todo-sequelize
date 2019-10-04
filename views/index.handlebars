@@ -1,17 +1,30 @@
-<a href="/todos/new" class="btn btn-outline-light">Create</a>
+<h3 class="text-center"><u>Todo List</u></h3>
 
-
-<ul class="plates">
+<ul class="todo-list">
   {{#each todos}}
-  <li>
-    <input type="checkbox" name="done" id="{{{this.id}}}" {{#if this.done}}checked{{/if}} disabled>
-    <label for="{{{this.id}}}">{{{this.name}}}</label>
+  <div class="row d-flex justify-content-end">
+    <div class="input-container d-flex">
 
-    <a href="/todos/{{{this.id}}}">detail</a>
-    <a href="/todos/{{{this.id}}}/edit">edit</a>
-    <form class="add-items" action="/todos/{{{this.id}}}/delete?_method=DELETE" method="POST" style="display: inline;">
-      <button type="submit">delete</button>
-    </form>
-  </li>
+      <input type="checkbox" name="done" id="{{{this.id}}}" {{#if this.done}}checked{{/if}} disabled>
+      <span class="checkmark"></span>
+      <div class="ml-4 pl-2">
+        <h5 for="{{{this.id}}}">{{{this.name}}}</h5>
+        <small class="d-block">{{{formatTime this.createdAt}}}</small>
+      </div>
+    </div>
+
+    <div class="d-flex align-self-center ml-auto">
+      <a class="btn" href="/todos/{{{this.id}}}"><i class="fas fa-info-circle"></i></a>
+      <a class="btn" href="/todos/{{{this.id}}}/edit"><i class="fas fa-edit"></i></a>
+      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#trigger-deleteItem-{{this._id}}"
+        style="margin-bottom: 18.5%"><i class="fas fa-trash"></i></button>
+      {{!-- <form class="add-items" action="/todos/{{{this.id}}}/delete?_method=DELETE" method="POST"
+          style="display: inline;">
+          <button type="submit">Delete</button>
+        </form> --}}
+    </div>
+
+
+  </div>
   {{/each}}
 </ul>

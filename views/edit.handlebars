@@ -1,7 +1,22 @@
-<div class="add-items">
+<h3 class="text-center"><u>Edit</u></h3>
+
+<div class="edit-container text-left mt-3">
+
   <form action="/todos/{{{todo.id}}}?_method=PUT" method="POST">
     <input type="checkbox" name="done" {{#if todo.done}}checked{{/if}}>
     <input type="text" name="name" value="{{{todo.name}}}" placeholder="name">
-    <button type="submit">Edit</button>
+
+    <hr>
+
+    <div class="form-group form-row">
+      <div class="col-md-8">
+        <textarea type="text" name="note" class="form-control" id="dnote" placeholder="Note here! (optional)" cols="30"
+          rows="6"></textarea>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-block btn-primary">Edit</button>
   </form>
+
+
+
 </div>

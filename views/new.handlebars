@@ -1,4 +1,18 @@
-<form class="add-items" action="/todos" method="POST">
-  <input type="text" name="name" placeholder="name">
-  <button type="submit">Create</button>
-</form>
+<h3 class="text-center"><u>Add A Note</u></h3>
+
+<div class="new-container text-left mt-3">
+  <form class="add-items" action="/todos" method="POST">
+    <input type="text" name="name" placeholder="name">
+
+    <hr>
+
+    <div class="form-group form-row">
+      <div class="col-md-8">
+        <textarea type="text" name="note" class="form-control" id="dnote" placeholder="Note here! (optional)" cols="30"
+          rows="6"></textarea>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-block btn-primary">Create</button>
+  </form>
+</div>

@@ -5,6 +5,13 @@ const User = db.User
 const Todo = db.Todo
 const { authenticated } = require('../config/auth')
 
+const Handlebars = require('handlebars')
+
+Handlebars.registerHelper('formatTime', (date) => {
+  let formatDate = date.toISOString().split("T")[0]
+  return formatDate
+})
+
 router.get('/', authenticated, (req, res) => {
   User.findByPk(req.user.id)
     .then((user) => {
