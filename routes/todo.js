@@ -12,15 +12,25 @@ router.get('/new', authenticated, (req, res) => {
 
 // 新增一筆  Todo
 router.post('/', authenticated, (req, res) => {
-  console.log(req.body.note)
-  Todo.create({
-    name: req.body.name,
-    note: req.body.note,
-    done: false,
-    UserId: req.user.id
-  })
-    .then((todo) => { return res.redirect('/') })
-    .catch((error) => { return res.status(422).json(error) })
+
+  if (req.body.name == '') {
+    req.flash('warning_msg', 'Title can not be blank.')
+    res.render('new', {
+      name: req.body.name,
+      note: req.body.note,
+    })
+  } else {
+    Todo.create({
+      name: req.body.name,
+      note: req.body.note,
+      done: false,
+      UserId: req.user.id
+    })
+      .then((todo) => { return res.redirect('/') })
+      .catch((error) => { return res.status(422).json(error) })
+  }
+
+
 })
 
 // 顯示一筆 Todo 的詳細內容

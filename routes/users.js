@@ -7,13 +7,19 @@ const db = require('../models')
 const User = db.User
 
 router.get('/login', (req, res) => {
-  res.render('login')
+  let errors = []
+  let errorMessage = req.flash('error')[0]
+  if (errorMessage) {
+    errors.push({ message: 'Email or Password incorrect!' })
+  }
+  res.render('login', { errors })
 })
 
 router.post('/login', (req, res, next) => {
   passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/users/login',
+    failureFlash: true
   })(req, res, next)
 })
 
@@ -25,39 +31,58 @@ router.get('/register', (req, res) => {
 
 router.post('/register', (req, res) => {
   const { name, email, password, password2 } = req.body
-  User.findOne({ where: { email: email } })
-    .then(user => {
-      if (user) {
-        console.log('User already exists')
-        res.render('register', {
-          name,
-          email,
-          password,
-          password2
-        })
-      } else {
-        const newUser = new User({
-          name,
-          email,
-          password
-        })
 
-        bcrypt.genSalt(10, (err, salt) => {
-          bcrypt.hash(newUser.password, salt, (err, hash) => {
-            if (err) throw err
-            newUser.password = hash
+  let errors = []
 
-            newUser.save()
-              .then(user => { res.redirect('/') })
-              .catch(err => console.log(err))
+  if (!email || !password || !password2) {
+    errors.push({ message: 'Email, Password and Confirm Password can not be blank.' })
+  }
+
+  if (password != password2) {
+    errors.push({ message: 'Password incorrect, Please check.' })
+  }
+
+  if (errors.length > 0) {
+    res.render('register', ({ errors, name, email, password, password2 }))
+  } else {
+    User.findOne({ where: { email: email } })
+      .then(user => {
+        if (user) {
+          errors.push({ message: 'This email address is already used.' })
+          res.render('register', {
+            errors,
+            name,
+            email,
+            password,
+            password2
           })
-        })
-      }
-    })
+        } else {
+          const newUser = new User({
+            name,
+            email,
+            password
+          })
+
+          bcrypt.genSalt(10, (err, salt) => {
+            bcrypt.hash(newUser.password, salt, (err, hash) => {
+              if (err) throw err
+              newUser.password = hash
+
+              newUser.save()
+                .then(user => { res.redirect('/') })
+                .catch(err => console.log(err))
+            })
+          })
+        }
+      })
+  }
+
+
 })
 
 router.get('/logout', (req, res) => {
   req.logout()
+  req.flash('success_msg', 'Success logout!')
   res.redirect('/users/login')
 })
 
