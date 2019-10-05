@@ -15,8 +15,11 @@
 
 ## Quick view
 
-![quick view](https://raw.githubusercontent.com/YunYuLo/todo-sequelize/master/public/img/project-view.gif)
-
+![login page](https://raw.githubusercontent.com/YunYuLo/todo-sequelize/master/public/img/login.png)
+![register page](https://raw.githubusercontent.com/YunYuLo/todo-sequelize/master/public/img/register.png)
+![index page](https://raw.githubusercontent.com/YunYuLo/todo-sequelize/master/public/img/index.png)
+![detail page](https://raw.githubusercontent.com/YunYuLo/todo-sequelize/master/public/img/detail.png)
+![new page](https://raw.githubusercontent.com/YunYuLo/todo-sequelize/master/public/img/new.png)
 
 
 
