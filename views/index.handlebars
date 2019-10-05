@@ -1,6 +1,6 @@
 <h3 class="text-center"><u>Todo List</u></h3>
 
-
+{{#if todos}}
 <input type="checkbox" checked onchange="w3.sortHTML('#id01', 'li', 'done')" data-toggle="toggle" data-onstyle="info"
   data-on="Sort by done" data-off="Sort by undone" data-offstyle="warning">
 
@@ -52,3 +52,11 @@
 
   {{/each}}
 </ul>
+
+{{else}}
+
+<h5 class="text-center mt-5">Seems like you have no list.</h5>
+<p class="text-center" style="font-size: 50px;"> <i class="fas fa-ghost mr-3"></i><i class="fas fa-ghost mr-3"></i><i
+    class="fas fa-ghost"></i> </p>
+
+{{/if}}
